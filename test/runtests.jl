@@ -7,38 +7,7 @@ using Test
 
 
 
-const test_scene_xml = """
-<scene version="2.0.0">
-	<shape type="sphere">
-		<bsdf type="diffuse"/>
-	</shape>
-	<integrator type="path"/>
-	<emitter type="point">
-		<rgb name="intensity" value="200,0,0"/>
-		<point name="position" x="2" y="0" z="2"/>
-	</emitter>
-	<emitter type="point">
-		<rgb name="intensity" value="0,0,200"/>
-		<point name="position" x="2" y="0" z="-2"/>
-	</emitter>
-	<sensor type="perspective">
-		<transform name="to_world">
-			<lookat origin="4, 0, 0" target="0, 0, 0" up="0, 0, 1"/>
-		</transform>
-		<film type="hdrfilm">
-			<integer name="width" value="256"/>
-			<integer name="height" value="256"/>
-		</film>
-		<sampler type="ldsampler">
-			<integer name="sample_count" value="256" />
-		</sampler>
-	</sensor>
-</scene>
-"""
-
-
-
-scene = mitsuba.load_string(test_scene_xml)
+scene = mitsuba.load_file("test_scene.xml")
 
 @testset "load a basic scene" begin
 	@test scene != PyNULL()
