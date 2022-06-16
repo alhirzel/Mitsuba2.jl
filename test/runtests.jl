@@ -26,8 +26,8 @@ const test_scene_xml = """
 			<lookat origin="4, 0, 0" target="0, 0, 0" up="0, 0, 1"/>
 		</transform>
 		<film type="hdrfilm">
-			<integer name="width" value="32"/>
-			<integer name="height" value="32"/>
+			<integer name="width" value="256"/>
+			<integer name="height" value="256"/>
 		</film>
 		<sampler type="ldsampler">
 			<integer name="sample_count" value="256" />
@@ -49,7 +49,7 @@ sensor = first(scene.sensors())
 
 @testset "render the scene" begin
 	@test scene.integrator().render(scene, sensor) # true means success
-	@test sensor.film().size() == [32, 32]
+	@test sensor.film().size() == [256, 256]
 end
 
 img = sensor.film().bitmap(raw=true)
