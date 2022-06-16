@@ -7,7 +7,7 @@ using Test
 
 
 
-scene = mitsuba.load_file("test_scene.xml")
+scene = mitsuba.load_string(read("test_scene.xml", String))
 
 @testset "load a basic scene" begin
 	@test scene != PyNULL()
@@ -21,11 +21,17 @@ sensor = first(scene.sensors())
 	@test sensor.film().size() == [256, 256]
 end
 
-img = sensor.film().bitmap(raw=true)
+bmp = sensor.film().bitmap(raw=true)
 
 # TODO - factor this into the package
-img = img.convert(mitsuba.Bitmap.PixelFormat.RGB, mitsuba.Struct.Type.Float32, srgb_gamma=false)
-img = mapslices(Base.splat(RGB), pyimport("numpy").array(img; copy=false); dims=(3,))[:, :, 1]
+bmp = bmp.convert(mitsuba.Bitmap.PixelFormat.RGB, mitsuba.Struct.Type.Float32, srgb_gamma=false)
+
+raw = pyimport("numpy").array(bmp; copy=false)
+raw .+= minimum(raw)
+raw ./= maximum(raw)
+img = mapslices(Base.splat(RGB), raw; dims=(3,))[:, :, 1]
+using FileIO
+save("test_scene.png", img)
 
 display(img)
 println("")
