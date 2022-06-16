@@ -2,3 +2,6 @@ name = "Mitsuba2"
 uuid = "6c282725-e040-40cc-ae5f-cc7292d67815"
 authors = ["Alex Hirzel <alex@lsa.solutions>"]
 version = "0.1.0"
+
+[deps]
+PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
