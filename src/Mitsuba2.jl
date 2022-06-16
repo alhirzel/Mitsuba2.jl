@@ -12,7 +12,7 @@ let mitsuba_module_name = "mitsuba",
 		:Bitmap, :FileResolver, :filesystem, :Float, :Frame3f, :Logger,
 		:Spectrum, :Ray3f, :Struct, :Thread, :Vector2f, :Vector3f,
 	],
-    render_imports = [
+	render_imports = [
 		:BSDF, :BSDFContext, :Emitter, :Film, :Film, :ImageBlock, :Integrator,
 		:PhaseFunction, :Sampler, :Scene, :Sensor, :Shape, :SurfaceInteraction3f,
 		:Texture, :Volume,
